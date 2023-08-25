@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useToken } from '../auth/useToken';
 import { useRouter } from "next/navigation";
 import axios from 'axios';
-import { REST_API_URL } from '../../variables';
 
 export default function Page() {
     const { token, setToken } = useToken();
@@ -14,7 +13,7 @@ export default function Page() {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        const response = await axios.post(`${REST_API_URL}/auth/login/`, {
+        const response = await axios.post(`${process.env.NEXT_PUBLIC_REST_API_URL}/auth/login/`, {
             username: username,
             password: password
         });

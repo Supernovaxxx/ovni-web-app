@@ -2,7 +2,6 @@ import { useUser } from './useUser';
 import { useToken } from './useToken';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
-import { REST_API_URL } from '@/variables';
 
 export function useUserInfo() {
     const user = useUser();
@@ -14,7 +13,7 @@ export function useUserInfo() {
     });
 
     async function getInfoFromUser() {
-        const response = await axios.get(`${REST_API_URL}/auth/me`, { headers: { Authorization: `Bearer ${token}`}});
+        const response = await axios.get(`${process.env.NEXT_PUBLIC_REST_API_URL}/auth/me`, { headers: { Authorization: `Bearer ${token}`}});
         setUserInfo(response);
     }
 
