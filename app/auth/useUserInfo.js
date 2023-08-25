@@ -6,7 +6,7 @@ import { REST_API_URL } from '@/variables';
 
 export function useUserInfo() {
     const user = useUser();
-    const [token] = useToken();
+    const {token} = useToken();
 
     const [userInfo, setUserInfo] = useState(() => {
         if (!user) return null;
