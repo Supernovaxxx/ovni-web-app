@@ -6,7 +6,7 @@ import axios from 'axios';
 import { REST_API_URL } from '../../variables';
 
 export default function Page() {
-    const [ token, setToken ] = useToken();
+    const { token, setToken } = useToken();
 
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');

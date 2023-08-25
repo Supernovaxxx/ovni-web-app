@@ -8,7 +8,7 @@ import { useUserInfo } from '../auth/useUserInfo';
 
 export default function Page() {
     const user = useUser();
-    // const [token, setToken] = useToken();
+    const {token, setToken} = useToken();
     const { user_id } = user;
 
     // const userInfo = async () => {
