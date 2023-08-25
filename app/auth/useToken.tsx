@@ -5,10 +5,10 @@ export function useToken() {
         return localStorage.getItem('token');
     });
 
-    function setToken(newToken) {
+    function setToken(newToken: string) {
         localStorage.setItem('token', newToken);
         setTokenInternal(newToken);
     }
 
-    return [token, setToken];
+    return {token, setToken};
 }
