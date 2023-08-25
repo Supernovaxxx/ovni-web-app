@@ -1,6 +1,7 @@
 'use client'
 import { useState } from "react";
 import { useToken } from '../auth/useToken';
+import { useRouter } from "next/navigation";
 import axios from 'axios';
 import { REST_API_URL } from '../../variables';
 
@@ -9,10 +10,10 @@ export default function Page() {
 
     const [ username, setUsername ] = useState('');
     const [ password, setPassword ] = useState('');
+    const router = useRouter();
 
     async function handleSubmit(e) {
         e.preventDefault();
-
         const response = await axios.post(`${REST_API_URL}/auth/login/`, {
             username: username,
             password: password
@@ -20,6 +21,7 @@ export default function Page() {
         const { access } = response.data;
         setToken(access);
         console.log(token);
+        router.push('/user');
     }
 
     return (
