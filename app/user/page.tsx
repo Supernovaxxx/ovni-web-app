@@ -1,26 +1,17 @@
 'use client'
-import { useUser } from '../auth/useUser';
-import { useRouter } from 'next/navigation';
-import { useToken } from '../auth/useToken';
-import { REST_API_URL } from '@/variables';
-import axios from 'axios';
-import { useUserInfo } from '../auth/useUserInfo';
+import { useUser } from '../auth/useUser'
+import { useRouter } from 'next/navigation'
+import { useToken } from '../auth/useToken'
+import { useUserInfo } from '../auth/useUserInfo'
 
 export default function Page() {
-    const user = useUser();
-    const {token, setToken} = useToken();
-    const { user_id } = user;
+    const user = useUser()
+    const {token, setToken} = useToken()
+    const { user_id } = user
+    const userInfo = useUserInfo()
+    const router = useRouter()
 
-    // const userInfo = async () => {
-    //     const response = await axios.get(`${REST_API_URL}/auth/me/`, { headers: { Authorization: `Bearer ${token}`}});
-    //     console.log(response)
-    //     return response
-    // }
-    const userInfo = useUserInfo();
-    console.log(userInfo);
-
-    const router = useRouter();
-    if (!user) return (router.push('/login'));
+    if (!user) return (router.push('/login'))
 
     return (
             <section className="flex flex-col w-60 p-10 gap-1">
