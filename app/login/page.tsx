@@ -1,26 +1,24 @@
 'use client'
-import { useState } from "react";
-import { useToken } from '../auth/useToken';
-import { useRouter } from "next/navigation";
-import axios from 'axios';
+import { useState } from "react"
+import { useToken } from '../auth/useToken'
+import { useRouter } from "next/navigation"
+import axios from 'axios'
 
 export default function Page() {
-    const { token, setToken } = useToken();
-
-    const [ username, setUsername ] = useState('');
-    const [ password, setPassword ] = useState('');
-    const router = useRouter();
+    const { token, setToken } = useToken()
+    const [ username, setUsername ] = useState('')
+    const [ password, setPassword ] = useState('')
+    const router = useRouter()
 
     async function handleSubmit(e) {
-        e.preventDefault();
+        e.preventDefault()
         const response = await axios.post(`${process.env.NEXT_PUBLIC_REST_API_URL}/auth/login/`, {
             username: username,
             password: password
-        });
-        const { access } = response.data;
-        setToken(access);
-        console.log(token);
-        router.push('/user');
+        })
+        const { access } = response.data
+        setToken(access)
+        router.push('/user')
     }
 
     return (

@@ -1,14 +1,14 @@
-import { useState } from 'react';
+import { useState } from 'react'
 
 export function useToken() {
     const [ token, setTokenInternal ] = useState(() => {
-        return localStorage.getItem('token');
+        return localStorage.getItem('token')
     });
 
     function setToken(newToken: string) {
-        localStorage.setItem('token', newToken);
-        setTokenInternal(newToken);
+        localStorage.setItem('token', newToken)
+        setTokenInternal(newToken)
     }
 
-    return {token, setToken};
+    return {token, setToken}
 }
