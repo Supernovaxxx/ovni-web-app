@@ -12,7 +12,6 @@ export interface User {
 export type Token = string | null
 
 export function useUser(token: Token) {
-
     async function getUser(token: Token) {
         const { data } = await axios.get<User>(
             `${process.env.NEXT_PUBLIC_REST_API_URL}/auth/me`,
@@ -28,9 +27,9 @@ export function useUser(token: Token) {
         })
         return data
     }
-
     return useQuery<User, AxiosError>({
         queryKey: ['getUser', token],
         queryFn: () => getUser(token),
+        staleTime: 2000
     })
 }
