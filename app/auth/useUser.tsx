@@ -1,6 +1,4 @@
-import { useToken } from './useToken'
-import { useState, useEffect } from 'react'
-import axios from 'axios'
+import axios, { AxiosError } from 'axios'
 import { useQuery } from '@tanstack/react-query'
 
 export interface User {
@@ -11,24 +9,28 @@ export interface User {
     last_name?: string,
 }
 
-export function useUser() {
-    const { token } = useToken()
-    const [user, setUser] = useState<User>()
+export type Token = string | null
 
-    const { data, isLoading, isError, failureReason } = useQuery({
-        queryKey: ['UserInfo'], // this is for caching. not sure how to use it yet
-        queryFn: async () => {
-            const { data } = await axios.get<User>(
-                `${process.env.NEXT_PUBLIC_REST_API_URL}/auth/me`,
-                { headers: { Authorization: `Bearer ${token}` } }
-            )
-            return data as User
-        },
+export function useUser(token: Token) {
+
+    async function getUser(token: Token) {
+        const { data } = await axios.get<User>(
+            `${process.env.NEXT_PUBLIC_REST_API_URL}/auth/me`,
+            { headers: { Authorization: `Bearer ${token}` } }
+        )
+        .catch(function (error) {
+            if (axios.isAxiosError(error)){
+                console.log(error.message)
+            } else {
+                error = new AxiosError('An unexpected error occurred')
+            }
+            return Promise.reject(error as AxiosError)
+        })
+        return data
+    }
+
+    return useQuery<User, AxiosError>({
+        queryKey: ['getUser', token],
+        queryFn: () => getUser(token),
     })
-
-    useEffect(() => {
-        setUser(data)
-    }, [token])
-
-    return { data, isLoading, isError, failureReason }
 }
