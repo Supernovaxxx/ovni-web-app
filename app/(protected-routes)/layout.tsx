@@ -1,7 +1,7 @@
 'use client'
 import { useRouter } from 'next/navigation'
-import { useToken } from '../auth/useToken'
-import { useUser } from '../auth/useUser'
+import { useToken } from '../../hooks/useToken'
+import { useUser } from '../../hooks/useUser'
 
 export default function ProtectedLayout({ children, }: { children: React.ReactNode }) {
     const { token } = useToken()

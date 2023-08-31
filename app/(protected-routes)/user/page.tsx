@@ -1,6 +1,6 @@
 'use client'
-import { useToken } from "@/app/auth/useToken"
-import { useUser } from "@/app/auth/useUser"
+import { useToken } from "@/hooks/useToken"
+import { useUser } from "@/hooks/useUser"
 
 export default function Page() {
     const { token } = useToken()
