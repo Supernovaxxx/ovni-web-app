@@ -9,7 +9,7 @@ export interface User {
     last_name?: string,
 }
 
-export type Token = string | null
+export type Token = string | null | undefined
 
 export function useUser(token: Token) {
     async function getUser(token: Token) {
