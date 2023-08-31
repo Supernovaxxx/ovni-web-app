@@ -30,6 +30,7 @@ export function useUser(token: Token) {
     return useQuery<User, AxiosError>({
         queryKey: ['getUser', token],
         queryFn: () => getUser(token),
-        staleTime: 2000
+        staleTime: 2000, 
+        useErrorBoundary: true
     })
 }
