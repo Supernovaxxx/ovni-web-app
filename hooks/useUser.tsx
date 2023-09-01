@@ -32,7 +32,5 @@ export function useUser(token: Token) {
         queryKey: ['getUser', token],
         queryFn: () => getUser(token),
         staleTime: 600000,
-        // useErrorBoundary: true,
-        // suspense: true,
     })
 }
