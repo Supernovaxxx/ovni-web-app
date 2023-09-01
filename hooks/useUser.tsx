@@ -1,5 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { useQuery } from '@tanstack/react-query'
+import { api } from '@/utils/axios-api'
 
 export interface User {
     pk: number,
@@ -13,8 +14,8 @@ export type Token = string | null | undefined
 
 export function useUser(token: Token) {
     async function getUser(token: Token) {
-        const { data } = await axios.get<User>(
-            `${process.env.NEXT_PUBLIC_REST_API_URL}/auth/me`,
+        const { data } = await api<User>(
+            `/auth/me`,
             { headers: { Authorization: `Bearer ${token}` } }
         )
         .catch(function (error) {
@@ -31,7 +32,7 @@ export function useUser(token: Token) {
         queryKey: ['getUser', token],
         queryFn: () => getUser(token),
         staleTime: 600000,
-        useErrorBoundary: true,
-        suspense: true,
+        // useErrorBoundary: true,
+        // suspense: true,
     })
 }
