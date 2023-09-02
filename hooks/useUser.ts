@@ -1,6 +1,6 @@
 import axios, { AxiosError } from 'axios'
 import { useQuery } from '@tanstack/react-query'
-import { api } from '@/utils/axios-api'
+import { api } from '@/utils/axios-sdk'
 
 export interface User {
     pk: number,

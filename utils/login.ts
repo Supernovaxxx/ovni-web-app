@@ -1,5 +1,5 @@
 import axios, { AxiosError } from "axios"
-import { api } from "./axios-api"
+import { api } from "./axios-sdk"
 
 export interface UserCredentials {
     username: string,
