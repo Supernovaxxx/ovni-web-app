@@ -1,5 +1,9 @@
-import axios, { AxiosError } from "axios"
-import { api } from "./axios-sdk"
+import axios, { AxiosError } from "axios";
+
+export const api = axios.create({
+    baseURL: process.env.NEXT_PUBLIC_REST_API_URL,
+})
+
 
 export interface UserCredentials {
     username: string,
