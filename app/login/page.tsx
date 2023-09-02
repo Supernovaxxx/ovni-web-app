@@ -2,7 +2,7 @@
 import { useState } from "react"
 import { useToken } from '../../hooks/useToken'
 import { useRouter } from "next/navigation"
-import { UserCredentials, logIn } from "@/utils/login"
+import { UserCredentials, logIn } from "@/lib/axios-sdk"
 
 export default function Page() {
     const { setToken } = useToken()
