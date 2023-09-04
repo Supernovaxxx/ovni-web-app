@@ -1,16 +1,7 @@
 import axios, { AxiosError } from 'axios'
 import { useQuery } from '@tanstack/react-query'
 import { api } from '@/lib/axios-sdk'
-
-export interface User {
-    pk: number,
-    username: string,
-    email: string,
-    first_name?: string,
-    last_name?: string,
-}
-
-export type Token = string | null | undefined
+import { User, Token } from '../types/user'
 
 export function useUser(token: Token) {
     async function getUser(token: Token) {

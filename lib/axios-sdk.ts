@@ -1,14 +1,9 @@
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError } from "axios"
+import { UserCredentials } from "@/types/user"
 
 export const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_REST_API_URL,
 })
-
-
-export interface UserCredentials {
-    username: string,
-    password: string
-}
 
 export async function logIn(credentials: UserCredentials) {
     const response = await api.post(
