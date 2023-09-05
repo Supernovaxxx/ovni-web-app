@@ -1,20 +1,15 @@
-'use client'
-import { useToken } from "@/hooks/useToken"
-import { useUser } from "@/hooks/useUser"
+import { options } from '../../api/auth/[...nextauth]/options'
+import { getServerSession } from 'next-auth/next'
 
-export default function Page() {
-    const { token } = useToken()
-    const { data } = useUser(token)
+export default async function Page() {
+    const session = await getServerSession(options)
 
-    if (data)
-        return (
-            <div className="p-8 flex flex-col gap-2">
-                <h1 className="text-lg font-bold">User info</h1>
-                <hr />
-                <p><strong>Username:</strong> {data.username}</p>
-                <p><strong>Email:</strong> {data.email}</p>
-                <p><strong>Name:</strong> {data.first_name} {data.last_name}</p>
-                <p><strong>User ID</strong> {data.pk}</p>
-            </div>
-        )
+    return (
+        <div className="p-8 flex flex-col gap-2">
+            <h1 className="text-lg font-bold">User info:</h1>
+            <hr />
+            <p>Name: {session!.user!.name}</p>
+            <p>User email: {session!.user!.email}</p>
+        </div>
+    )
 }
