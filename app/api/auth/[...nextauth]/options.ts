@@ -18,7 +18,7 @@ export const options: NextAuthOptions = {
             },
             async authorize(credentials) {
                 const response = await logIn(credentials!)
-                return (response.status === 200 ? response : null)
+                return (response.status === 200 ? response.data.user : null) 
             }
         })
     ],
