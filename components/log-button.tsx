@@ -1,13 +1,8 @@
 'use client'
+import { LogButtonProps } from '@/types/components'
 import { useRouter } from 'next/navigation'
 
-export default function LogButton({
-    children,
-    role
-}: {
-    children: React.ReactNode,
-    role: string
-}) {
+export default function LogButton({children, role}: LogButtonProps) {
     const router = useRouter()
     return (
         <button
