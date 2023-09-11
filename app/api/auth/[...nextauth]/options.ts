@@ -1,4 +1,4 @@
-import type { NextAuthOptions } from 'next-auth'
+import type { NextAuthOptions, Session } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
 import { logIn } from '@/lib/axios-sdk'
 
@@ -37,7 +37,7 @@ export const options: NextAuthOptions = {
             return token
         },
         async session({token}) {
-            return token
+            return token as unknown as Session
         },
     }
 }
