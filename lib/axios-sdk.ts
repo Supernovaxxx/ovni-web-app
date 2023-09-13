@@ -1,9 +1,10 @@
 import axios, { AxiosError } from "axios"
 import { UserCredentials } from "@/types/user"
 import { useQuery } from '@tanstack/react-query'
-import { Token, UserInfo } from '@/types/user'
+import { UserInfo } from '@/types/user'
 import { getServerSession } from "next-auth/next"
 import { options } from "@/app/api/auth/[...nextauth]/options"
+
 
 export const api = axios.create({
     baseURL: process.env.NEXT_PUBLIC_REST_API_URL,
@@ -12,27 +13,21 @@ export const api = axios.create({
 api.interceptors.request.use(async (request) => {
     const session = await getServerSession(options)
     if (session) {
-        request.headers = {
-            ...request.headers,
-            Authorization: `Bearer ${session.access_token}`,
-        };
+        request.headers.Authorization = `Bearer ${session.access}`
     }
     return request
 })
 
 export async function logIn(credentials: UserCredentials) {
-    const response = await api.post(
-        `/auth/login/`, {
-        username: credentials.username,
-        password: credentials.password
-    }).catch(function (error) {
-        if (axios.isAxiosError(error)) {
-            console.log(error.message)
-        } else {
-            error = new AxiosError('An unexpected error occurred')
-        }
-        return error
-    })
+    const response = await api.post(`/auth/login/`, credentials)
+        .catch(function (error) {
+            if (axios.isAxiosError(error)) {
+                console.log(error.message)
+            } else {
+                error = new AxiosError('An unexpected error occurred')
+            }
+            return error
+        })
     return response
 }
 
@@ -41,7 +36,7 @@ export async function refreshToken(refreshToken: string) {
         'auth/token/refresh/', {
         refresh: refreshToken
     }
-    ).catch(function (error){
+    ).catch(function (error) {
         if (!axios.isAxiosError(error)) {
             error = new AxiosError('An unexpected error occurred')
         }
