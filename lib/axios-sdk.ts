@@ -7,7 +7,7 @@ import { options } from "@/app/api/auth/[...nextauth]/options"
 
 
 export const api = axios.create({
-    baseURL: process.env.NEXT_PUBLIC_REST_API_URL,
+    baseURL: process.env.REST_API_URL,
 })
 
 api.interceptors.request.use(async (request) => {
