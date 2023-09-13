@@ -1,35 +1,25 @@
-import NextAuth from 'next-auth'
+import NextAuth, { DefaultSession } from 'next-auth'
 import { JWT } from "next-auth/jwt"
+import { UserInfo } from '@/types/user'
+
+
+interface AuthorizationResponse {
+    access: string
+    refresh: string
+    user: UserInfo
+}
 
 declare module 'next-auth' {
-    interface User {
-        access: string
-        refresh: string
-        user: {
-            pk: number
-            username: string
-            email: string
-            first_name?: string
-            last_name?: string
-        }
-    }
 
-    interface Session {
-        user?: User
+    type User = AuthorizationResponse
+
+    interface Session extends AuthorizationResponse {
+        expires: number
     }
 }
 
 declare module "next-auth/jwt" {
-    interface JWT {
-        access_token: string
-        refresh_token: string
-        user: {
-            pk: number
-            username: string
-            email: string
-            first_name?: string
-            last_name?: string
-        }
-        ref: number
+    interface JWT extends AuthorizationResponse {
+        expires: number
     }
 }
