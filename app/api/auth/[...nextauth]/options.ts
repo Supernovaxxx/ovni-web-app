@@ -1,6 +1,6 @@
 import type { NextAuthOptions } from 'next-auth'
 import CredentialsProvider from 'next-auth/providers/credentials'
-import { logIn, refreshToken } from '@/lib/axios-sdk'
+import { logIn, refreshToken } from '@/lib/sdk'
 
 const BACKEND_ACCESS_TOKEN_LIFETIME = 45 * 60
 const BACKEND_REFRESH_TOKEN_LIFETIME = 60 * 60
