@@ -1,6 +1,6 @@
 import { options } from "@/app/api/auth/[...nextauth]/options"
 import { getServerSession } from "next-auth/next"
-import LogButton from "./log-button"
+import LoginButton from "./login-button"
 import { UserInfo } from '../types/user'
 
 export default async function Header() {
@@ -12,9 +12,9 @@ export default async function Header() {
             {session
                 ? <>
                     <p>{user?.username}</p>
-                    <LogButton role='signout'>Log out</LogButton>
+                    <LoginButton role='signout'>Log out</LoginButton>
                 </>
-                : <LogButton role='signin'>Log in</LogButton>
+                : <LoginButton role='signin'>Log in</LoginButton>
             }
         </header>
     )
