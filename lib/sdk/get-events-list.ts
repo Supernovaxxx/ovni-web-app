@@ -1,12 +1,12 @@
-import { UserInfo } from "@/types/user"
 import { api } from "./axios"
 import axios, { AxiosError } from "axios"
 import { useQuery } from "@tanstack/react-query"
+import { EventsList } from "@/types/events"
 
-export function getUserInfo() {
-    async function getUser() {
-        const { data } = await api<UserInfo>(
-            `/auth/me`,
+export function getEventsList() {
+    async function getList() {
+        const { data } = await api<EventsList>(
+            `/events/`,
         ).catch(function (error) {
             if (axios.isAxiosError(error)) {
                 console.log(error.message)
@@ -17,9 +17,9 @@ export function getUserInfo() {
         })
         return data
     }
-    return useQuery<UserInfo, AxiosError>({
+    return useQuery<EventsList, AxiosError>({
         queryKey: ['getUser'],
-        queryFn: () => getUser(),
+        queryFn: () => getList(),
         staleTime: 600000,
     })
 }
