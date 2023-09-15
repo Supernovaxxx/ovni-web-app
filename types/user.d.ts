@@ -1,9 +1,9 @@
-export interface User {
+export interface UserInfo {
     pk: number,
     username: string,
     email: string,
-    first_name?: string,
-    last_name?: string,
+    first_name: string,
+    last_name: string,
 }
 
 export type Token = string | null | undefined
